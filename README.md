@@ -17,4 +17,5 @@ Commande à utilisé sur ubuntu :
 | Avant de lancer le programme sur ubuntu | git pull origin main | Permet d'avoir la dernière version du programme sur github            |
 | Avant de fermer le programme | git add .                                            | Permet d'enregistrer dans le github le programme | 
 |                              | git commit -m "Test de synchronisation avec VS Code" |                                                  |
-|                              | git push                                             |                                                  | 
+|                              | git push                                             |                                                  |
+-----------------
