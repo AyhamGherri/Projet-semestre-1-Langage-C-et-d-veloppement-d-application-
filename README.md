@@ -12,10 +12,24 @@ Licence 2 Informatique : Groupe TD-03 :
 | GHERRI  | Ayham  | 22403058          |
 -----------------
 
-Commande à utilisé sur ubuntu :
+Commande à utiliser sur ubuntu :
 
-Avant de lancer le programme sur ubuntu (Permet d'avoir la dernière version du programme sur github) : git pull origin main
-Avant de fermer le programme (Permet d'enregistrer dans le github le programme) : git add .  
-                                                                                  git commit -m "Test de synchronisation avec VS Code"   
-                                                                                  git push
+### 1. Avant de commencer à coder
+Récupérez toujours la dernière version du projet présente sur GitHub :
 
+```bash
+git pull origin main
+```
+
+### 2. Une fois votre travail terminé (ou une fonctionnalité ajoutée)
+Enregistrez et partagez vos modifications sur GitHub en 3 commandes :
+
+```
+# 1. Sélectionner tous les fichiers modifiés
+git add .
+
+# 2. Enregistrer la version avec un message explicatif
+git commit -m "Description de ce que vous avez fait"
+
+# 3. Envoyer les modifications sur GitHub
+git push
