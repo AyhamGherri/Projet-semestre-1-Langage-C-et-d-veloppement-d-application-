@@ -1,8 +1,8 @@
-run: IN316_haguiga_gherri_ahmed
-	./IN316_haguiga_gherri_ahmed
+run: main
+	./main
 
-IN316_haguiga_gherri_ahmed: IN316_haguiga_gherri_ahmed.c
-	gcc -Wall -o IN316_haguiga_gherri_ahmed IN316_haguiga_gherri_ahmed.c -lm
+main: main.c
+	gcc -Wall -o main main.c -lm
 
 clean:
-	rm -f IN316_haguiga_gherri_ahmed
+	rm -f main
