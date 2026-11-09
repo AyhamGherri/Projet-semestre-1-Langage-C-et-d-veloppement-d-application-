@@ -15,7 +15,7 @@ Licence 2 Informatique : Groupe TD-03 :
 Commande à utilisé sur ubuntu :
 
 Avant de lancer le programme sur ubuntu (Permet d'avoir la dernière version du programme sur github) : git pull origin main
-Avant de fermer le programme (Permet d'enregistrer dans le github le programme) : git add .
-                                                                                  git commit -m "Test de synchronisation avec VS Code" 
+Avant de fermer le programme (Permet d'enregistrer dans le github le programme) : git add .  
+                                                                                  git commit -m "Test de synchronisation avec VS Code"   
                                                                                   git push
 
