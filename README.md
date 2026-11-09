@@ -20,6 +20,14 @@ Récupérez toujours la dernière version du projet présente sur GitHub :
 ```bash
 git pull origin main
 ```
+ou 
+```
+git pull
+```
+Si même en fesant ça rien n'est à jour, faire un hard reset (attention il supprime toute les modifications faite sur le pc et ne garde que la version github)
+```
+git reset --hard origin/main
+```
 
 ### 2. Une fois votre travail terminé (ou une fonctionnalité ajoutée)
 Enregistrez et partagez vos modifications sur GitHub en 3 commandes :
@@ -33,3 +41,9 @@ git commit -m "Description de ce que vous avez fait"
 
 # 3. Envoyer les modifications sur GitHub
 git push
+```
+
+### Pour savoir le status 
+```
+git status
+```
