@@ -1,8 +1,8 @@
-run: main
-	./main
+run: Initialiser
+	./Initialiser
 
-main: main.c
-	gcc -Wall -o main main.c -lm
+main: Initialiser.c
+	gcc -Wall -o Initialiser Initialiser.c -lm
 
 clean:
-	rm -f main
+	rm -f Initialiser

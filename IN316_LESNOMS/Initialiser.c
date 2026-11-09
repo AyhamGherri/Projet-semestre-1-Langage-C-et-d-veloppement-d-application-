@@ -1,0 +1,4 @@
+/* projet final */
+    
+#include "stdio.h"
+#include "stdlib.h"
