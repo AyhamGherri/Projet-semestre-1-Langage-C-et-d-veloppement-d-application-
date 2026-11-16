@@ -2,7 +2,7 @@
     
 #include "stdio.h"
 #include "stdlib.h"
-#includ "dirent.h"
+#include "dirent.h"
 #define LARGEUR 1024
 #define HAUTEUR 768
 #define MAXVAL 255 // c'est la valeur max pour un pixel
