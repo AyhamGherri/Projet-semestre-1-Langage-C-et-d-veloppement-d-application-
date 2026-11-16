@@ -21,4 +21,3 @@ void creer_dossiers(){
         system(command);
     }
 }
-
