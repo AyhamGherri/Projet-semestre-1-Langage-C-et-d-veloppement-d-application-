@@ -6,21 +6,13 @@
 #define HAUTEUR 768
 #define MAXVAL 255 // c'est la valeur max pour un pixel
 
-// Structure pour représenter un pixel
-typedef struct {
-    int r;
-    int g;
-    int b;
-} Pixel;
-
-// Structure pour représenter une image
-typedef struct {
-    int largeur;
-    int hauteur;
-    int maxval;
-    Pixel *pixels;
-} Image;
-
+struct image {
+    int largeur,hauteur;
+    int range;
+    int** r;
+    int** b;
+    int** v;
+}
 // Fonction pour créer une image avec des dimensions qu on a
 const int dimensions[9][2] = {{1024, 768},{512, 384},{256, 192},{128, 96},{64, 48},{32, 24},{16, 12},{8, 6},{4, 3}
 };
