@@ -3,6 +3,8 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "dirent.h"
+#include "sys/stat.h"
+#include "sys/types.h"
 #define LARGEUR 1024
 #define HAUTEUR 768
 #define MAXVAL 255 // c'est la valeur max pour un pixel
@@ -14,15 +16,29 @@ struct image {
     int** bleu;
     int** vert;
 };
+
+
 //creer dossier pour les images
-void creer_dossiers(){
-    File = *f
-    for(int i = 0; i < 9; i++){
-        char command[100];
-        sprintf(command, "mkdir -p %s", dossiers[i]);
-        system(command);
+
+void cree_dossier(){
+    mkdir("BASE_PPM",0755);
+    char *taille[]={
+        "BASE_PPM/1024x768",
+        "BASE_PPM/512x384",
+        "BASE_PPM/256x192",
+        "BASE_PPM/128x96",
+        "BASE_PPM/64x48",
+        "BASE_PPM/32x24",
+        "BASE_PPM/16x12",
+        "BASE_PPM/8x6",
+        "BASE_PPM/4x3"
+    };
+    for (int i = 0 ; i < 9 ; i++ )
+    {
+        mkdir(taille[i], 0755);
     }
 }
+
 struct image *cree_image(int largeur, int hauteur, int range) {
     struct image *img = malloc(sizeof(struct image));
 
@@ -77,7 +93,22 @@ void libere_image(struct image *img){
 struct image *lire_fichier(const char *nom) {
 }
 
-int ecrire_fichier(const struct image *img, const char *nom) {
+// fonction de la question 3 (h) qui permet de stocker les 
+
+int stockage_pixels_images_liste(){
+
+}
+
+// fonction qui calcule les moyennes de pixels
+
+int moyene_pixels(image){
+
+}
+
+// fonction qui permet de crée le chemin jusqu'a l'image que l'on doit afficher.
+
+int chemin_de_chaque_image(char *chem) {
+
 }
 
 
