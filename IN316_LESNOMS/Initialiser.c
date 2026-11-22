@@ -39,6 +39,11 @@ void cree_dossier(){
     }
 }
 
+void convertion_ppm() {
+    
+}
+
+
 struct image *cree_image(int largeur, int hauteur, int range) {
     struct image *img = malloc(sizeof(struct image));
 
