@@ -1,28 +1,38 @@
 /* projet final */
     
+/* Bibliothèques */
 #include "stdio.h"
 #include "stdlib.h"
 #include "dirent.h"
 #include "sys/stat.h"
 #include "sys/types.h"
+
+
 #define LARGEUR 1024
 #define HAUTEUR 768
 #define MAXVAL 255 // c'est la valeur max pour un pixel
 
+
 struct image {
-    int largeur,hauteur;
-    int range;
+    int largeur, hauteur;
+    int range; 
+
     int** rouge;
     int** bleu;
     int** vert;
 };
 
+int verifie_dossier(const char *chemin){                                    // Fonction qui permet de vérifier si un dossier existe ou non
+    struct stat info;                                                       // Crée la variable "info" vide qui pourra stocker les informations d'un fichier
+    return stat(chemin, &info) == 0 && S_ISDIR(info.st_mode);               // Récupère les données du fichier et les stocks dans "info" ET vérifie si il s'agit bien d'un dossier.
+}
 
-//creer dossier pour les images
-
-void cree_dossier(){
-    mkdir("BASE_PPM",0755);
-    char *taille[]={
+void cree_dossier(){                                                        // Fonction qui permet de crée un dossier si celui ci n'existe pas
+    if (!verifie_dossier("BASE_PPM")){                                      // Utilise la fonction Verifie_dossier pour voir si le dossier "BASE_PPM" existe
+        mkdir("BASE_PPM", 0755);                                            // Si il n'existe pas, on le crée  
+    }
+    
+    char *taille[9]={                                                       // Crée un tableau contenant des chaînes de caractère pour les tailles que chaque image doivent faire
         "BASE_PPM/1024x768",
         "BASE_PPM/512x384",
         "BASE_PPM/256x192",
@@ -32,19 +42,32 @@ void cree_dossier(){
         "BASE_PPM/16x12",
         "BASE_PPM/8x6",
         "BASE_PPM/4x3"
-    };
-    for (int i = 0 ; i < 9 ; i++ )
-    {
-        mkdir(taille[i], 0755);
+    }
+
+    for (int i = 0 ; i < 9 ; i++ ){                                          // Parcours chaque taille des images
+        if (!verifie_dossier(taille[i])){                                    // Grâce a la fonction "verifie_dossier" on vérifie si chaque taille existe bien dans les dossiers
+            mkdir(taille[i], 0755);                                          // Si il n'existe pas, on le crée 
+        }
     }
 }
 
-void convertion_ppm() {
-    
+void sauter_commntaire(FILE *fichier){
+    // rien a écrire ici
 }
 
+void lire_entete(FILE *fichier, struct *img){
+    char magic[3];
 
-struct image *cree_image(int largeur, int hauteur, int range) {
+    fscanf(fichier, "%s", magic);
+
+    sauter_commntaire(fichier);
+
+    fscanf(fichier, "%d %d %d", &img -> largeur, &img -> hauteur, &(img -> range));
+
+    sauter_commntaire(fichier); 
+}
+
+struct image *allouer_memoire_image(int largeur, int hauteur){                // Fonction qui permet d'allouer de la mémoire 
     struct image *img = malloc(sizeof(struct image));
 
     if (img == NULL){
@@ -58,6 +81,7 @@ struct image *cree_image(int largeur, int hauteur, int range) {
     if (img -> rouge == NULL || img -> vert == NULL || img -> bleu == NULL) {
             liberer_image(img);
             return NULL;
+    }
 
     int i;
 
@@ -69,11 +93,16 @@ struct image *cree_image(int largeur, int hauteur, int range) {
         if (img -> rouge[i] == NULL || img -> vert[i] == NULL || img -> bleu[i] == NULL) {
             liberer_image(img);
             return NULL;
+        }
     }
 
 }
 
 void libere_image(struct image *img){
+    if (img == NULL){
+        return NULL;
+    }
+
     int i; 
     
     for (i = 0; i < img -> hauteur; i++){
@@ -93,6 +122,24 @@ void libere_image(struct image *img){
     free(img -> bleu);
 
     free(img);
+}
+
+void convertir_ppm(struct *image){
+    FILE *F = fopen(image, "r");
+
+}
+
+int lire_image_ppm(char *nom){
+    FILE *fichier;
+
+    struct image *img = malloc(sizeof(struct image));
+    fichier = fopen(nom, "r");
+    if (fichier == NULL){
+        printf("Erreur lors de l'ouverture du fichier %s\n", nom);
+        exit(1);
+    }
+
+    
 }
 
 struct image *lire_fichier(const char *nom) {
@@ -118,5 +165,7 @@ int chemin_de_chaque_image(char *chem) {
 
 
 int main(){
+    cree_dossier();
 
+    return 0;
 }
