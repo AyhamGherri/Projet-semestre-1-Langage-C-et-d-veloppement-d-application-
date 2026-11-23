@@ -153,7 +153,23 @@ int stockage_pixels_images_liste(){
 
 // fonction qui calcule les moyennes de pixels
 
-int moyene_pixels(image){
+void moyenne_images(struct image *img, int **rouge, int **vert, int **bleu) {
+    long somme_rouge = 0;
+    long somme_vert = 0;
+    long somme_bleu = 0;
+
+    for (int i = 0; i < img->hauteur; i++) {
+        for (int j = 0; j < img->largeur; j++) {
+            somme_rouge += rouge[i][j]; //la somme des pixels
+            somme_vert += vert[i][j];
+            somme_bleu += bleu[i][j];
+        }
+    }
+
+    long total_pixels = img->largeur * img->hauteur; // Calcul du nombre total de pixels H x L
+    int moyenne_rouge = somme_rouge / total_pixels;
+    int moyenne_vert = somme_vert / total_pixels;
+    int moyenne_bleu = somme_bleu / total_pixels;
 
 }
 
