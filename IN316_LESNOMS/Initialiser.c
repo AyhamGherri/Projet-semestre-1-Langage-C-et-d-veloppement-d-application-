@@ -19,14 +19,16 @@ struct image {
     int range; 
 
     int** rouge;
-    int** bleu;
     int** vert;
+    int** bleu;
 };
+
 
 int verifie_dossier(const char *chemin){    // Fonction qui permet de vérifier si un dossier existe ou non
     struct stat info;   // Crée la variable "info" vide qui pourra stocker les informations d'un fichier
     return stat(chemin, &info) == 0 && S_ISDIR(info.st_mode);   // Récupère les données du fichier et les stocks dans "info" ET vérifie si il s'agit bien d'un dossier.
 }
+
 
 void cree_dossier(){    // Fonction qui permet de crée un dossier si celui ci n'existe pas
     if (!verifie_dossier("BASE_PPM")){  // Utilise la fonction Verifie_dossier pour voir si le dossier "BASE_PPM" existe
@@ -52,9 +54,11 @@ void cree_dossier(){    // Fonction qui permet de crée un dossier si celui ci n
     }
 }
 
+
 void sauter_commntaire(FILE *fichier){
     // rien a écrire ici
 }
+
 
 void lire_entete(FILE *fichier, struct *img){
     char magic[3];
@@ -67,6 +71,7 @@ void lire_entete(FILE *fichier, struct *img){
 
     sauter_commntaire(fichier); 
 }
+
 
 struct image *allouer_memoire_image(int largeur, int hauteur){  // Fonction qui permet d'allouer de la mémoire 
     struct image *img = malloc(sizeof(struct image));
@@ -99,6 +104,7 @@ struct image *allouer_memoire_image(int largeur, int hauteur){  // Fonction qui 
 
 }
 
+
 void libere_image(struct image *img){   // Fonction qui permet de liberer l'image si celle ci 
     if (img == NULL){
         return NULL;
@@ -126,17 +132,23 @@ void libere_image(struct image *img){   // Fonction qui permet de liberer l'imag
 }
 
 
-void convertir_ppm(struct *image){  // Fonction qui permet de transformer une image de n'importe quelle format en image.ppm
-    char *nouveau = malloc(sizeof(struct image));   // On crée une nouvelle chaîne de caractère qui va stocker une copie de l'image
-    strcpy(nouveau, image); // On copie image dans nouveau
+void convertir_ppm(const char *nom){  // Fonction qui permet de transformer une image de n'importe quelle format en image.ppm, elle prend en paramatrère une chaîne de caractère qui correspond au nom de notre fichier (on ne veut pas la modifier donc on met const)
+    char *nouveau = malloc(strlen(nom) + 1);   // On crée une nouvelle chaîne de caractère qui va stocker en mémoire une copie de l'image (on met le + 1 pour bien prendre en compte le "\0" qui est à la fin de la chaine de caractère)
+    strcpy(nouveau, nom); // On copie image dans notre variable "nouveau"
 
-    char *point = strrchr(nouveau, ".");
-    if (point != NULL){
-        *point = "\0";
+    char *point = strrchr(nouveau, '.');    // on définie un pointeur qui va chercher dans notre variable "nouveau" quand il y a eu pour la dérnière fois un "."
+    if (point != NULL){ // si il y a un point dans le nom de "nouveau"
+        *point = '\0';  // on ajoute "\0" pour renommer "nouveau" et enlever tout ce qu'il y a apres le point 
     }
 
-    ............
+    char commande[50];  // On définit une chaine de caractère "commande" qui va stocker la commande magick qui va être écrite dans le terminale 
+    snprintf(commande, sizeof commmande, "magick IMAGE/BASE/%s -compress none BASE_PPM/%s.ppm", nom, nouveau);    // On écrit dans "commande" la commande magick qui va stocker notre nouvelle image PPM dans le dossier "BASE_PPM" et va s'assurer avec "-compress none" que c'est bien en P3 
+
+    int res = system(commande);     // écrit dans le terminale la notre chaine de caractère "commande", elle convertie finalement nouveau en PPM
+    
+    free(nouveau);   // Maintenantr qu'on a convertie notre image en PPM on peut libérer "nouveau"
 }
+
 
 int lire_image_ppm(char *nom){  // Fonction qui permet de lire l'image qu'on vient de convertir en image.ppm
     FILE *fichier;
@@ -148,17 +160,20 @@ int lire_image_ppm(char *nom){  // Fonction qui permet de lire l'image qu'on vie
         exit(1);
     }
 
-    ..............
+    ...........
 }
+
 
 struct image *lire_fichier(const char *nom) {
 }
+
 
 // fonction de la question 3 (h) qui permet de stocker les 
 
 int stockage_pixels_images_liste(){
 
 }
+
 
 // fonction qui calcule les moyennes de pixels
 
